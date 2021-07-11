@@ -1,0 +1,61 @@
+{
+    "name": "@plurid/dataface-mongo",
+    "version": "0.0.0-0",
+    "description": "Interface for Mongo Database",
+    "keywords": [
+        "dataface",
+        "mongo"
+    ],
+    "author": "ly3xqhl8g9 <ly3xqhl8g9@plurid.com> (https://plurid.com)",
+    "license": "UNLICENSED",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/plurid/dataface"
+    },
+    "bugs": {
+        "email": "source@plurid.com",
+        "url": "https://github.com/plurid/dataface/issues"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    },
+    "files": [
+        "distribution/"
+    ],
+    "main": "distribution/index.js",
+    "module": "distribution/index.es.js",
+    "types": "distribution/index.d.ts",
+    "engines": {
+        "node": ">=12",
+        "npm": ">=6"
+    },
+    "scripts": {
+        "clean": "rm -rf ./distribution",
+        "clean.tests": "find ./distribution -type d -name '*__tests__' -exec rm -rf {} +",
+        "test": "jest",
+        "lint": "eslint ./source --ext .ts,.tsx",
+        "start": "yarn clean && rollup -c ./scripts/rollup.config.js -w --environment ENV_MODE:local",
+        "build.local": "yarn clean && rollup -c ./scripts/rollup.config.js --environment ENV_MODE:local",
+        "build.development": "yarn clean && rollup -c./scripts/rollup.config.js --environment ENV_MODE:development",
+        "build.production": "yarn clean && rollup -c ./scripts/rollup.config.js --environment ENV_MODE:production && yarn clean.tests",
+        "build": "yarn lint && yarn test && yarn build.production",
+        "prepublishOnly": "yarn build"
+    },
+    "peerDependencies": {
+        "mongodb": ">=3.6"
+    },
+    "devDependencies": {
+        "@types/jest": "^26.0.23",
+        "@types/mongodb": "^3.6.18",
+        "@typescript-eslint/eslint-plugin": "^4.28.0",
+        "@typescript-eslint/parser": "^4.28.0",
+        "eslint": "^7.29.0",
+        "jest": "^27.0.5",
+        "mongodb": "^3.6.9",
+        "rollup": "^2.52.2",
+        "rollup-plugin-typescript2": "^0.30.0",
+        "ts-jest": "^27.0.3",
+        "typescript": "^4.3.4"
+    }
+}
