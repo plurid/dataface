@@ -34,7 +34,7 @@
         "clean": "rm -rf ./distribution",
         "clean.tests": "find ./distribution -type d -name '*__tests__' -exec rm -rf {} +",
         "test": "jest",
-        "lint": "eslint ./source --ext .ts,.tsx",
+        "lint": "eslint -c ./configurations/.eslintrc.js ./source --ext .ts,.tsx",
         "start": "yarn clean && rollup -c ./scripts/rollup.config.js -w --environment ENV_MODE:local",
         "build.local": "yarn clean && rollup -c ./scripts/rollup.config.js --environment ENV_MODE:local",
         "build.development": "yarn clean && rollup -c./scripts/rollup.config.js --environment ENV_MODE:development",
