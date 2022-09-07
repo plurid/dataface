@@ -10,6 +10,7 @@ specifiers:
   rollup: ^2.79.0
   rollup-plugin-typescript2: ^0.33.0
   ts-jest: ^28.0.8
+  tslib: ^2.4.0
   typescript: ^4.8.2
 
 devDependencies:
@@ -22,6 +23,7 @@ devDependencies:
   rollup: 2.79.0
   rollup-plugin-typescript2: 0.33.0_id3sp2lbl4kx3dskm7teaj32um
   ts-jest: 28.0.8_zdyhcbevkwd4nk5cau2hjnqbjq
+  tslib: 2.4.0
   typescript: 4.8.2
 
 packages:
