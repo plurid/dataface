@@ -2,7 +2,7 @@
     // #region libraries
     import {
         Collection,
-        FilterQuery,
+        Filter,
     } from 'mongodb';
     // #endregion libraries
 
@@ -62,7 +62,7 @@ const getBy = async <T>(
         const filter: any = {};
         filter[type] = value;
 
-        const data = await collection.findOne<T>(filter);
+        const data = (await collection.find(filter).toArray())[0] as T;
 
         return data;
     } catch (error) {
@@ -99,7 +99,7 @@ const getAllBy = async <T>(
         }
 
         const cursor = collection.find(filter);
-        const data: T[] = await cursor.toArray();
+        const data: T[] = await cursor.toArray() as T[];
 
         return data;
     } catch (error) {
@@ -131,7 +131,7 @@ const getAllFrom = async <T>(
         }
 
         const cursor = collection.find(filter);
-        const items: T[] = await cursor.toArray();
+        const items: T[] = await cursor.toArray() as T[];
 
         return items;
     } catch (error) {
@@ -149,7 +149,7 @@ const getAllFrom = async <T>(
  */
 const getAllWhere = async <T>(
     collection: Collection,
-    filter: FilterQuery<any>,
+    filter: Filter<any>,
     pagination?: Pagination,
 ): Promise<T[]> => {
     try {
@@ -163,7 +163,7 @@ const getAllWhere = async <T>(
         }
 
         const cursor = collection.find(filter);
-        const items: T[] = await cursor.toArray();
+        const items: T[] = await cursor.toArray() as T[];
 
         return items;
     } catch (error) {
@@ -277,7 +277,7 @@ const updateField = async <T>(
 
 const updateWhere = async <T>(
     collection: Collection,
-    filter: FilterQuery<any>,
+    filter: Filter<any>,
     field: string,
     value: T,
 ) => {
@@ -373,7 +373,7 @@ const deleteDocument = async (
  */
 const deleteDocumentBy = async (
     collection: Collection,
-    filter: FilterQuery<any>,
+    filter: Filter<any>,
 ) => {
     try {
         const result = await collection.deleteOne(

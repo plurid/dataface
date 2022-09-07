@@ -2,8 +2,8 @@
     // #region libraries
     import {
         Collection,
-        ObjectID,
-        FilterQuery,
+        Filter,
+        ObjectId,
     } from 'mongodb';
     // #endregion libraries
 
@@ -20,7 +20,7 @@
 // #region module
 const handlePagination = async <T>(
     collection: Collection,
-    filter: FilterQuery<any>,
+    filter: Filter<any>,
     pagination?: Pagination,
 ) => {
     if (pagination) {
@@ -38,7 +38,7 @@ const handlePagination = async <T>(
             });
 
             if (item) {
-                const lastID = new ObjectID(item._id);
+                const lastID = new ObjectId(item._id);
                 filter['_id'] = {
                     '$lt': lastID,
                 };
@@ -53,7 +53,7 @@ const handlePagination = async <T>(
                 $natural: sortType,
             }).limit(count);
 
-        const items: T[] = await cursor.toArray();
+        const items: T[] = await cursor.toArray() as T[];
 
         return items;
     }
